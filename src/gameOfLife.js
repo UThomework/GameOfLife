@@ -15,5 +15,8 @@ var GameOfLife = function (size) {
 
 		return matrix;
 	}
+	this.setStatusCell = function(x, y){
+		matrix[x][y] = !matrix[x][y];
+	}
 
 }
