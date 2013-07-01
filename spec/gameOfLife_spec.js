@@ -25,7 +25,6 @@ describe("Game Of Life Kata", function() {
 	  var aux = game.setStatusCell(8,8);
 	  expect(aux).toBe(false);
 	});
-
 	it("can recive a Initial position of entire matrix", function() {
 		var init = [[1, 2], [3, 4], [2, 4]];
 		game.giveInitialPosition(init);
@@ -44,7 +43,23 @@ describe("Game Of Life Kata", function() {
 		expect(result[6][2]).toBe(false);
 		expect(result[0][0]).toBe(false);
 		expect(result[6][6]).toBe(false);
-		
+	});
+	it("calculate the next generation of the matrix", function() {
+		var init = [[3, 3]];
+		game.giveInitialPosition(init);
+		expect(result[3][3]).toBe(true);
+		var nextGeneration = game.nextIteration();
+		expect(nextGeneration[3][3]).toBe(false);
+	});
+	it("calculate the next generation of the matrix", function() {
+		var init = [[2, 1],[2,2],[2,3]];
+		game.giveInitialPosition(init);
+		var nextGeneration = game.nextIteration();
+		expect(nextGeneration[1][2]).toBe(true);
+		expect(nextGeneration[2][2]).toBe(true);
+		expect(nextGeneration[3][2]).toBe(true);
+		expect(nextGeneration[2][1]).toBe(false);
+		expect(nextGeneration[2][3]).toBe(false);
 	});
 
 

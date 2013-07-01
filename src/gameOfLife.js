@@ -1,5 +1,6 @@
-var GameOfLife = function (size) {
+	var GameOfLife = function (size) {
 	var matrix = [];
+	var nextMatrix = [];
 
 	this.fillMatrix = function(){
 
@@ -10,10 +11,22 @@ var GameOfLife = function (size) {
 			};
 			matrix.push(auxiliar);
 		};
+		for (var i = 0; i < size; i++) {
+			var auxiliar = [];
+			for (var j = 0; j < size; j++) {
+				auxiliar.push(false);
+			};
+			nextMatrix.push(auxiliar);
+		};
+		
 	}
 	this.getMatrix = function(){
 
 		return matrix;
+	}
+	this.getNextMatrix = function(){
+
+		return nextMatrix;
 	}
 	this.setStatusCell = function(x, y){
 		if(x >= size   || y >= size ||
@@ -32,5 +45,30 @@ var GameOfLife = function (size) {
 			this.setStatusCell(posX,posY);
 		};
 
+	}
+	this.nextIteration = function(){
+		//matrix = nextMatrix;
+		for (var i = 1; i < size-1; i++) {
+			for (var j = 1; j < size-1; j++) {
+				var count = this.countNeighbors(i,j);
+				if(count == 3 || (count == 2 && matrix[i][j]))
+					nextMatrix[i][j] = true;
+				if(count > 3 || count < 2)
+					nextMatrix[i][j] = false;
+			};	
+		};
+		return nextMatrix;
+	}
+	this.countNeighbors = function(x,y){
+		var result = 0;
+		for (var i = 0; i < 9; i++) {
+			var posx = parseInt(i/3) +(x-1);
+			var posy = (i - ((parseInt(i/3))*3))+(y-1);;
+			if(posx==x && posy ==y)
+				continue;
+			if(matrix[posx][posy])
+				result++;
+		};
+		return result;
 	}
 }
