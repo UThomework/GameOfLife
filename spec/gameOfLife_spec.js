@@ -60,6 +60,13 @@ describe("Game Of Life Kata", function() {
 		expect(nextGeneration[3][2]).toBe(true);
 		expect(nextGeneration[2][1]).toBe(false);
 		expect(nextGeneration[2][3]).toBe(false);
+		var nextGeneration2 = game.nextIteration();
+		expect(nextGeneration2[1][2]).toBe(false);
+		expect(nextGeneration2[2][2]).toBe(true);
+		expect(nextGeneration2[3][2]).toBe(false);
+		expect(nextGeneration2[2][1]).toBe(true);
+		expect(nextGeneration2[2][3]).toBe(true);
+
 	});
 
 
